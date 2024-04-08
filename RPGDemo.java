@@ -29,7 +29,7 @@ public class RPGDemo
         Thread.sleep(2500);
         System.out.println("(where would like to go?) \n[1]Adventurers guild"
                 + "\n[2]Blacksmith \n[3]Potion seller \n[4]The plains \n[5]Inventory"
-                + "\n[6] Save your game");
+                + "\n[6]Save game");
         
         
     }
