@@ -8,6 +8,6 @@ package pdcproject;
  *
  * @author Uni
  */
-public class EXP {
+public class experincePoints {
     
 }
