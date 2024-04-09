@@ -12,9 +12,11 @@ import java.util.Scanner;
  * @author vcs4803
  */
 /**
- * TODO: When gold is used in a shop, decrement from total amount in inventory.
- *
- *
+ * TODO:_______________________________________________________________________
+ * Figure out how to incorporate the other classes (Player, Shop) to relate to
+ * inventory.__________________________________________________________________
+ * Have the GameSave class save all inventory info for the specific save.______
+ * Fine tune the addItem function______________________________________________
  */
 public class Inventory {
 
@@ -24,6 +26,7 @@ public class Inventory {
 
         int gold = 20;
         String item = null;
+        item = "Potion";
 
         while (openInven != false) {
             boolean valid = false;
@@ -48,7 +51,7 @@ public class Inventory {
             //Equipping Equipment
             while (valid != true) {
                 try {
-                    System.out.println("Choose an equpiment [1], [2], [3], [4], [5], [6], [7], [8], [9]");
+                    System.out.println("Choose an equpiment [1] --> [9]");
                     Scanner select = new Scanner(System.in);
                     equipped = select.nextInt() - 1;
                     System.out.println("Currently Equipped: " + inventory[equipped]);
@@ -67,6 +70,23 @@ public class Inventory {
                 if (answer.equalsIgnoreCase("Y")) {
                     System.out.println("You've used 20 Gold!");
                     useItem(inventory, "Gold", 20, 20);
+                    item = null;
+                } else {
+                    openInven = true;
+                }
+            }
+
+            //Test for Potion usage
+            if (equipped == 2) {
+                System.out.println("Would you like to use a potion? [Y] [N]");
+                Scanner input = new Scanner(System.in);
+                String answer = input.nextLine();
+
+                int currentAmount = 2;
+                if (answer.equalsIgnoreCase("Y")) {
+                    System.out.println("You've gained 20 HP!");
+                    useItem(inventory, "Potion", currentAmount, 1);
+                    currentAmount--;
                     item = null;
                 } else {
                     openInven = true;
