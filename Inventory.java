@@ -12,25 +12,32 @@ import java.util.Scanner;
  * @author vcs4803
  */
 /**
- * ✓ List or array of items Search list, empty element in list, DON'T fill in
- * gaps with other items ✓ Exit Inventory Prompt
+ * TODO: When gold is used in a shop, decrement from total amount in inventory.
  *
- * TODO: 
- * Save inventory to GameSave data (FileReader)
- * When inventory is selected (in RPGDemo class) opens inventory
- * Update inventory slot when item has been purchased, swapped, or moved over
  *
  */
 public class Inventory {
 
     public static void main(String[] args) {
         boolean openInven = true;
+        String[] inventory = {"[Wooden Sword]", "[Rusty Shield]", "[Potion]", "[Gold]", "[  ]", "[  ]", "[  ]", "[  ]", "[  ]"};
+
+        int gold = 20;
+        String item = null;
 
         while (openInven != false) {
             boolean valid = false;
             int equipped = -1;
 
-            String[] inventory = {"[Wooden Sword]", "[Rusty Shield]", "[Bow]", "[Arrow]", "[  ]", "[  ]", "[  ]", "[  ]", "[  ]"};
+            //Replace null values with item aquired (from Enemy or Shop)
+            //Item + gold added to inventory
+            if (item != null) {
+                addItem(inventory, "[  ]", item, 2);
+            }
+
+            if (gold != 0) {
+                addGold(inventory, "[Gold]", gold);
+            }
 
             //Display Inventory
             for (String inventory1 : inventory) {
@@ -38,6 +45,7 @@ public class Inventory {
             }
             System.out.println();
 
+            //Equipping Equipment
             while (valid != true) {
                 try {
                     System.out.println("Choose an equpiment [1], [2], [3], [4], [5], [6], [7], [8], [9]");
@@ -47,14 +55,25 @@ public class Inventory {
                 } catch (InputMismatchException | ArrayIndexOutOfBoundsException e) {
                     System.out.println("Invalid input, select an item within your inventory.");
                 }
-                if (equipped < 0 || equipped >= inventory.length) {
-                    valid = false;
+                valid = !(equipped < 0 || equipped >= inventory.length);
+            }
+
+            //Test if gold is 0
+            if (equipped == 3) {
+                System.out.println("Would you like to use all gold? [Y] [N]");
+                Scanner input = new Scanner(System.in);
+                String answer = input.nextLine();
+
+                if (answer.equalsIgnoreCase("Y")) {
+                    System.out.println("You've used 20 Gold!");
+                    useItem(inventory, "Gold", 20, 20);
+                    item = null;
                 } else {
-                    valid = true;
+                    openInven = true;
                 }
             }
 
-            //Exitting Inventory
+            //Exiting Inventory
             boolean validExit = false;
             Scanner exitPrompt = new Scanner(System.in);
             System.out.println("Exit Inventory? [Y] [N]");
@@ -77,12 +96,54 @@ public class Inventory {
             }
         }
     }
-    
-    public void addItem() {
-        
+
+    //Item gets added to inventory
+    static void addItem(String[] inventory, String itemSpace, String item, int amount) {
+        for (int i = 0; i < inventory.length; i++) {
+            if (inventory[i].equals("[" + item + "]")) {
+                if (amount <= 1) {
+                    inventory[i] = "[" + item + "]";
+                    return;
+                }
+                inventory[i] = "[" + item + "(" + amount + ")" + "]";
+                return;
+            }
+            if (inventory[i].equals("[  ]")) {
+                inventory[i] = "[" + item + "]";
+                return;
+            }
+        }
     }
-    
-    public void moveItem() {
-        
+
+    //Gold gets added to more gold
+    static void addGold(String[] inventory, String goldSpace, int gold) {
+        for (int i = 0; i < inventory.length; i++) {
+            if (inventory[i].equals("[Gold]")) {
+                inventory[i] = "[Gold" + "(" + gold + ")" + "]";
+                return;
+            }
+        }
     }
+
+    //When item is used, deplete total no. that/those item/s
+    //currentAmount = how much in possession
+    //usage = how much you want/need to use
+    static void useItem(String[] inventory, String item, int currentAmount, int usage) {
+        for (int i = 0; i < inventory.length; i++) {
+            if (inventory[i].equals("[" + item + "(" + currentAmount + ")" + "]")) {
+                currentAmount -= usage;
+                if (currentAmount < 2) {
+                    if (currentAmount < 1) {
+                        inventory[i] = "[  ]";
+                        return;
+                    }
+                    inventory[i] = "[" + item + "]";
+                    return;
+                }
+                inventory[i] = "[" + item + "(" + currentAmount + ")" + "]";
+                return;
+            }
+        }
+    }
+
 }
