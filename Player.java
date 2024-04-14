@@ -13,9 +13,9 @@ public class Player extends Level implements healthPoints
     private String playerName;
     private int hp = 30;
     private Level playerLevel;
-    
+
     //player stats
-    public Player(String playerName, int hp)
+    public Player(String playerName, int hp) 
     {
         this.playerName = playerName;
         this.hp = hp;
@@ -25,8 +25,9 @@ public class Player extends Level implements healthPoints
     //empty constructor
     public Player() 
     {
+        
     }
-    
+
     public String getPlayerName()
     {
         return playerName;
@@ -38,12 +39,12 @@ public class Player extends Level implements healthPoints
     }
 
     @Override
-    public int getHP() 
+    public int getHP()
     {
         return hp;
     }
-    
-    public int getPlayerLevel()
+
+    public int getPlayerLevel() 
     {
         return playerLevel.getLevel();
     }
@@ -52,18 +53,17 @@ public class Player extends Level implements healthPoints
     public void Damage(int dmg) 
     {
         hp -= dmg;
-        if(hp <= 0)
-        {
+        if (hp <= 0) {
             hp = 0;
         }
     }
 
     @Override
-    public boolean isAlive() 
+    public boolean isAlive()
     {
         return hp > 0;
     }
-    
+
     @Override
     public void gainEXP(int EXP)
     {
