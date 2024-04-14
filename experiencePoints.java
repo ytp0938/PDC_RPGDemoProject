@@ -8,6 +8,9 @@ package pdcproject;
  *
  * @author Uni
  */
-public class experiencePoints {
-    
+public interface experiencePoints 
+{
+    public void gainEXP(int EXP);
+    public int getCurrentEXP();
+    public int getLevel();
 }
