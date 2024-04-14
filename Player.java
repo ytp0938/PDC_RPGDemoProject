@@ -11,7 +11,7 @@ package pdcproject;
 public class Player extends Level implements healthPoints
 {
     private String playerName;
-    private int hp = 100;
+    private int hp = 30;
     private Level playerLevel;
     
     //player stats
