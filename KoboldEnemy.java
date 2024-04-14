@@ -8,18 +8,18 @@ package pdcproject;
  *
  * @author Uni
  */
-public class KoboldEnemy implements healthPoints, enemyDefeated
+public class koboldEnemy implements healthPoints, enemyDefeated
 {
     private int hp = 25;
     private final int droppedEXP = 50;
     private final String droppedItems = "healthPotion";
-    
+
     @Override
-    public int getHP() 
+    public int getHP()
     {
         return hp;
     }
-        
+
     @Override
     public int getDroppedEXP() 
     {
@@ -36,15 +36,15 @@ public class KoboldEnemy implements healthPoints, enemyDefeated
     public void Damage(int dmg) 
     {
         hp -= dmg;
-        if(hp < 0)
+        if (hp < 0) 
         {
             hp = 0;
         }
     }
 
     @Override
-    public boolean isAlive() 
+    public boolean isAlive()
     {
         return hp > 0;
-    }      
+    }
 }
