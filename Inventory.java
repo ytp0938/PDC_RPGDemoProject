@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package comp603.textrpgcollab;
+package pdcproject;
 
+import java.io.Serializable;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -18,15 +19,15 @@ import java.util.Scanner;
  * Have the GameSave class save all inventory info for the specific save.______
  * Fine tune the addItem function______________________________________________
  */
-public class Inventory {
+public class Inventory implements Serializable {
 
-    public static void main(String[] args) {
+    public void showInventory() {
         boolean openInven = true;
-        String[] inventory = {"[Wooden Sword]", "[Rusty Shield]", "[Potion]", "[Gold]", "[  ]", "[  ]", "[  ]", "[  ]", "[  ]"};
+        KoboldEnemy enemyItem = new KoboldEnemy();
+        String[] inventory = {"[Wooden Sword]", "[Rusty Shield]", "[Health Potion]", "[Gold]", "[  ]", "[  ]", "[  ]", "[  ]", "[  ]"};
 
         int gold = 20;
         String item = null;
-        item = "Potion";
 
         while (openInven != false) {
             boolean valid = false;
@@ -35,7 +36,7 @@ public class Inventory {
             //Replace null values with item aquired (from Enemy or Shop)
             //Item + gold added to inventory
             if (item != null) {
-                addItem(inventory, "[  ]", item, 2);
+                addItem(inventory, "[  ]", enemyItem.getDroppedItems(), 2);
             }
 
             if (gold != 0) {
@@ -59,21 +60,6 @@ public class Inventory {
                     System.out.println("Invalid input, select an item within your inventory.");
                 }
                 valid = !(equipped < 0 || equipped >= inventory.length);
-            }
-
-            //Test if gold is 0
-            if (equipped == 3) {
-                System.out.println("Would you like to use all gold? [Y] [N]");
-                Scanner input = new Scanner(System.in);
-                String answer = input.nextLine();
-
-                if (answer.equalsIgnoreCase("Y")) {
-                    System.out.println("You've used 20 Gold!");
-                    useItem(inventory, "Gold", 20, 20);
-                    item = null;
-                } else {
-                    openInven = true;
-                }
             }
 
             //Test for Potion usage
@@ -135,6 +121,8 @@ public class Inventory {
         }
     }
 
+    
+    
     //Gold gets added to more gold
     static void addGold(String[] inventory, String goldSpace, int gold) {
         for (int i = 0; i < inventory.length; i++) {
@@ -165,5 +153,4 @@ public class Inventory {
             }
         }
     }
-
 }
