@@ -55,7 +55,6 @@ public class Player extends Level implements healthPoints
         if(hp <= 0)
         {
             hp = 0;
-            System.out.println("Game Over!");
         }
     }
 
