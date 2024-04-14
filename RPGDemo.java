@@ -14,15 +14,15 @@ import java.util.Scanner;
 
 /*TO-DO LIST
 add in unimplemented classes
-*/
-public class RPGDemo 
+ */
+public class RPGDemo
 {
     private final Player pn = new Player();
     private int playerProgress = 0; //depending on how far the player has progressed the counter will increment by one
     private boolean questStarted = false; //once the player has started the quest it will become true
     private final Scanner scan = new Scanner(System.in);
 
-    public static void main(String[] args)
+    public static void main(String[] args) 
     {
         RPGDemo start;
         start = new RPGDemo();
@@ -43,7 +43,7 @@ public class RPGDemo
 
     public void townSquare() 
     {
-        try 
+        try
         {
             System.out.println("(where would like to go?) \n[1]Adventurers guild"
                     + "\n[2]Shops \n[3]The plains \n[4]Inventory \n[5]Save/exit game");
@@ -68,7 +68,7 @@ public class RPGDemo
             switch (test) 
             {
                 case 1:
-                    if(playerProgress == 0) 
+                    if (playerProgress == 0)
                     {
                         System.out.println("Welcome to the Faba Adventurers Guild! is this your first time here?");
                         System.out.println("If so I have the perfect quest for a beginner like you!");
@@ -78,7 +78,6 @@ public class RPGDemo
                         pause(5);
                         System.out.println("just head on over to 'The plains' to get started on you quest!");
                         playerProgress += 1;
-                        System.out.println("(you have started quest "+1+")");
                         questStarted = true;
                         pause(5);
                         System.out.println("\n\n\n\n");
@@ -91,8 +90,8 @@ public class RPGDemo
                         pause(5);
                         System.out.println("\n\n\n\n");
                         townSquare();
-                    }
-                    else if(playerProgress == 2)
+                    } 
+                    else if (playerProgress == 2)
                     {
                         System.out.println("Hey! look at you! it seems that you've gotten stronger!");
                         pause(2);
@@ -108,7 +107,7 @@ public class RPGDemo
                         pause(2);
                         System.out.println("(you became a member of the Faba Adventurers Guild!)");
                         pause(2);
-                        System.out.println("Well then "+pn.getPlayerName()+". I wish you the best of luck "
+                        System.out.println("Well then " + pn.getPlayerName() + ". I wish you the best of luck "
                                 + "on your journey!");
                         pause(3);
                         System.out.println("See ya around kid!\n\n\n\n\n\n");
@@ -117,11 +116,11 @@ public class RPGDemo
                     }
                     break;
                 case 2:
-                    System.out.println("(call shop class)");
+                    // add shop class
                     townSquare();
                     break;
                 case 3:
-                    if(questStarted == false) 
+                    if (questStarted == false) 
                     {
                         System.out.println("(not much to do here)");
                         System.out.print(".");
@@ -133,22 +132,24 @@ public class RPGDemo
                         System.out.println("(you returned to town)\n\n\n");
                         pause(2);
                         townSquare();
-                    }
-                    else if(playerProgress == 1)
+                    } 
+                    else if (playerProgress == 1) 
                     {
                         Player player = new Player(pn.getPlayerName(), 30);
-                        KoboldEnemy kobold = new KoboldEnemy();
+                        koboldEnemy kobold = new koboldEnemy();
                         Combat c = new Combat(player, kobold);
                         c.playerCombat();
-                        if (!player.isAlive()) 
+                        
+                        if (!player.isAlive())
                         {
                             System.out.println("YOU DIED!\nGAME OVER");
                             return;
                         }
-                        
+
                         playerProgress += 1;
-                        System.out.println("\nQuest Complete!");
-                        questStarted = false;
+                        questStarted = false; /*had to change to false since I kept
+                        getting issues with another else if statement I implemented
+                        which I had to remove(would've just been additional dialouge)*/
                         townSquare();
                     }
                     break;
@@ -177,7 +178,7 @@ public class RPGDemo
         }
     }
 
-    public void pause(int seconds) 
+    public void pause(int seconds)
     {
         try 
         {
@@ -188,8 +189,8 @@ public class RPGDemo
             System.out.println(e.getLocalizedMessage());
         }
     }
-    
-    public void thanksForPlaying()
+
+    public void thanksForPlaying() 
     {
         System.out.println("This is the end of our RPG Demo! I hope that you enjoyed"
                 + " our game!");
