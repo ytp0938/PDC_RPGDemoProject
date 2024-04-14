@@ -10,9 +10,9 @@ package pdcproject;
  */
 public class KoboldEnemy implements healthPoints, enemyDefeated
 {
-    private int hp = 50;
+    private int hp = 25;
     private final int droppedEXP = 50;
-    private String droppedItems = "healthPotion";
+    private final String droppedItems = "healthPotion";
     
     @Override
     public int getHP() 
