@@ -8,7 +8,9 @@ package pdcproject;
  *
  * @author Uni
  */
-class healthPoints
+interface healthPoints
 {
-    
+    public int getHP();
+    public void Damage(int dmg);
+    public boolean isAlive();
 }
