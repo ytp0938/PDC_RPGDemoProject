@@ -53,7 +53,8 @@ public class Player extends Level implements healthPoints
     public void Damage(int dmg) 
     {
         hp -= dmg;
-        if (hp <= 0) {
+        if (hp <= 0)
+        {
             hp = 0;
         }
     }
