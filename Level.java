@@ -12,15 +12,15 @@ public class Level implements experiencePoints
 {
     private int level;
     private int currentEXP;
-    
+
     public Level()
     {
         this.currentEXP = 0;
         this.level = 1;
     }
-    
+
     @Override
-    public int getCurrentEXP() 
+    public int getCurrentEXP()
     {
         return currentEXP;
     }
@@ -30,25 +30,25 @@ public class Level implements experiencePoints
     {
         return level;
     }
-    
-    private void levelUp()
+
+    public void levelUp()
     {
-        level++;  
-        System.out.println("You are now level "+level+"!");
+        level++;
+        System.out.println("You are now level " + level + "!");
     }
 
     @Override
-    public void gainEXP(int EXP)
+    public void gainEXP(int EXP) 
     {
         currentEXP += EXP;
-        
-        while(currentEXP >= levelReq())
+
+        while (currentEXP >= levelReq()) 
         {
             levelUp();
         }
     }
-    
-    private int levelReq()
+
+    public int levelReq() 
     {
         return level * 50;
     }
