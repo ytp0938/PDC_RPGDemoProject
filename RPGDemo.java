@@ -142,16 +142,14 @@ public class RPGDemo {
 
                 case 5:
                     GameSave gameSave = new GameSave();
-                    gameSave.saveGame(pn, inventory, playerProgress, questStarted);
+                    gameSave.saveGame(pn, inventory, pn.getPlayerLevel(), playerProgress);
                     townSquare();
                     break;
                 case 6:
                     //Edit when the load function works properly
-                    /*
+                    //Doesn't load as intended
                     GameSave gameLoad = new GameSave();
                     gameLoad.loadGame();
-                    */
-                    System.out.println("(Insert load class here)");
                     townSquare();
                     break;
                 case 7:
